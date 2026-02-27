@@ -6,7 +6,7 @@ The system allows customers to book appointments online while administrators man
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 This application demonstrates:
 
@@ -20,7 +20,7 @@ This application demonstrates:
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - Python 3
 - Flask 3.1.2
@@ -37,7 +37,7 @@ This application demonstrates:
 
 ---
 
-## 🗄️ Database Configuration
+##  Database Configuration
 
 The system connects to a MySQL database using:
 
@@ -58,7 +58,7 @@ The application uses:
 
 ---
 
-## 👤 Database Models
+##  Database Models
 
 ### User
 - Secure authentication system
@@ -82,7 +82,7 @@ The application uses:
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
 ### Customer Features
 - User registration and login
@@ -101,7 +101,7 @@ The application uses:
 
 ---
 
-## 🔐 Security Implementation
+##  Security Implementation
 
 - Password hashing (Werkzeug)
 - Flask-Login session management
@@ -111,7 +111,7 @@ The application uses:
 
 ---
 
-## 🚀 Installation Guide
+##  Installation Guide
 
 1️⃣ Clone the repository:
 
@@ -134,7 +134,7 @@ python app.py
 
 ---
 
-## 🌐 Running the Application
+##  Running the Application
 
 After starting the Flask development server:
 
@@ -153,7 +153,7 @@ This is a local development server. The URL will only work after running the app
 
 ---
 
-## 📄 Available Routes (After Running the App)
+##  Available Routes (After Running the App)
 
 Public Pages:
 - Home → /
@@ -167,7 +167,7 @@ Protected Pages (Login Required):
 
 ---
 
-## 🔄 Database Reset Script
+##  Database Reset Script
 
 The project includes a database reset script that:
 
@@ -184,7 +184,7 @@ Password: Admin123
 
 ---
 
-## 📚 Purpose
+##  Purpose
 
 This project demonstrates practical experience in:
 
@@ -196,7 +196,7 @@ This project demonstrates practical experience in:
 
 ---
 
-## 👩🏽‍💻 Author
+##  Author
 
 Alice Valencia Maseko  
 IT Graduate 
