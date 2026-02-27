@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Contact Messages{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section-title">
+        <h2><i class="fas fa-envelope"></i> Contact Messages</h2>
+        <p class="section-subtitle">View all customer messages</p>
+    </div>
+    
+    {% if messages %}
+        <div id="messages-container" style="display: flex; flex-direction: column; gap: 20px;">
+            {% for message in messages %}
+            <div id="message-{{ message.id }}" class="message-card {% if not message.read %}unread{% else %}read{% endif %}">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <div>
+                        <strong>{{ message.name }}</strong> &lt;{{ message.email }}&gt;
+                        {% if message.phone %}
+                            | 📞 {{ message.phone }}
+                        {% endif %}
+                    </div>
+                    <div style="color: #666; font-size: 0.9rem;">
+                        {{ message.created_at.strftime('%b %d, %Y at %I:%M %p') }}
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 10px;">
+                    <strong>Subject:</strong> {{ message.subject or 'No Subject' }}
+                </div>
+                
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 5px; margin-bottom: 15px;">
+                    {{ message.message }}
+                </div>
+                
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    {% if not message.read %}
+                    <button type="button" onclick="markAsRead('{{ message.id }}')" 
+                            style="background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-check"></i> Mark as Read
+                    </button>
+                    {% endif %}
+                    
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ message.email }}&su=Re: {{ message.subject or 'Your Message' }}" 
+                       target="_blank"
+                       style="background: #17a2b8; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-reply"></i> Reply
+                    </a>
+                    
+                    <button type="button" onclick="deleteMessage('{{ message.id }}')" 
+                            style="background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center; color: #666;">
+            <p><i class="fas fa-info-circle"></i> Total messages: {{ messages|length }}</p>
+            <p style="margin-top: 10px;">
+                <span style="background: #007bff; color: white; padding: 5px 10px; border-radius: 4px; margin-right: 10px;">
+                    Unread: {{ messages|selectattr('read', 'equalto', False)|list|length }}
+                </span>
+                <span style="background: #28a745; color: white; padding: 5px 10px; border-radius: 4px; margin-right: 10px;">
+                    Read: {{ messages|selectattr('read', 'equalto', True)|list|length }}
+                </span>
+            </p>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 3rem;">
+            <div style="font-size: 4rem; color: #ccc; margin-bottom: 1rem;">
+                <i class="fas fa-envelope-open"></i>
+            </div>
+            <h3>No Messages Yet</h3>
+            <p style="color: #666; margin: 1rem 0 2rem;">No one has sent messages through the contact form yet.</p>
+            <a href="{{ url_for('contact') }}" class="btn" style="background: #4a235a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-envelope"></i> Go to Contact Page
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .section-title {
+        text-align: center;
+        margin-bottom: 30px;
+        background: linear-gradient(135deg, #4a235a, #2c3e50);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .section-title h2 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        margin-top: 5px;
+        opacity: 0.9;
+        font-size: 1rem;
+    }
+    
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    /* Message card styles */
+    .message-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .message-card.unread {
+        border-left: 4px solid #007bff;
+    }
+    
+    .message-card.read {
+        border-left: 4px solid #6c757d;
+    }
+    
+    /* Animation for notifications */
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    /* Notification styling */
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        color: white;
+        z-index: 1000;
+        animation: slideIn 0.3s ease;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    
+    .notification.success {
+        background: #28a745;
+    }
+    
+    .notification.error {
+        background: #dc3545;
+    }
+    
+    .notification.info {
+        background: #17a2b8;
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+        }
+        
+        .section-title {
+            padding: 15px;
+        }
+    }
+</style>
+
+<script>
+    // URL helper for admin routes
+    function getAdminURL(path) {
+        const url = new URL(window.location.href);
+        const key = url.searchParams.get('key') || 'vally123';
+        return `${path}?key=${key}`;
+    }
+    
+    async function markAsRead(messageId) {
+        if (!confirm('Mark this message as read?')) {
+            return;
+        }
+        
+        try {
+            const adminUrl = getAdminURL(`/admin/messages/read/${messageId}`);
+            const response = await fetch(adminUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Update the message card
+                const messageCard = document.getElementById(`message-${messageId}`);
+                if (messageCard) {
+                    messageCard.classList.remove('unread');
+                    messageCard.classList.add('read');
+                    
+                    // Remove the "Mark as Read" button
+                    const markReadBtn = messageCard.querySelector('button[onclick^="markAsRead"]');
+                    if (markReadBtn) {
+                        markReadBtn.remove();
+                    }
+                }
+                
+                // Show success notification
+                showNotification('Message marked as read!', 'success');
+                
+                // Update unread count
+                updateUnreadCount(-1);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification('Error marking message as read', 'error');
+        }
+    }
+    
+    async function deleteMessage(messageId) {
+        if (!confirm('Are you sure you want to delete this message?')) {
+            return;
+        }
+        
+        try {
+            const adminUrl = getAdminURL(`/admin/messages/delete/${messageId}`);
+            const response = await fetch(adminUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Remove the message card with animation
+                const messageCard = document.getElementById(`message-${messageId}`);
+                if (messageCard) {
+                    messageCard.style.opacity = '0';
+                    messageCard.style.transform = 'translateX(-20px)';
+                    messageCard.style.transition = 'all 0.3s ease';
+                    
+                    setTimeout(() => {
+                        messageCard.remove();
+                        
+                        // Check if container is empty
+                        const container = document.getElementById('messages-container');
+                        if (container && container.children.length === 0) {
+                            location.reload(); // Reload to show "no messages" message
+                        }
+                    }, 300);
+                }
+                
+                // Show success notification
+                showNotification('Message deleted!', 'success');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification('Error deleting message', 'error');
+        }
+    }
+    
+    function showNotification(message, type) {
+        // Remove any existing notifications
+        const existingNotifications = document.querySelectorAll('.notification');
+        existingNotifications.forEach(notification => notification.remove());
+        
+        // Create new notification
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 300);
+        }, 3000);
+    }
+    
+    function updateUnreadCount(change) {
+        const unreadElement = document.querySelector('span[style*="background: #007bff"]');
+        if (unreadElement) {
+            const currentText = unreadElement.textContent;
+            const currentCount = parseInt(currentText.match(/\d+/)[0]);
+            const newCount = Math.max(0, currentCount + change);
+            unreadElement.textContent = `Unread: ${newCount}`;
+            
+            // Also update read count
+            const readElement = document.querySelector('span[style*="background: #28a745"]');
+            if (readElement) {
+                const readText = readElement.textContent;
+                const readCount = parseInt(readText.match(/\d+/)[0]);
+                readElement.textContent = `Read: ${readCount - change}`;
+            }
+        }
+    }
+</script>
+{% endblock %}

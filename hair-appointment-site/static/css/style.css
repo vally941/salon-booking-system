@@ -1,0 +1,844 @@
+/* ===== VALLY'S DIVINE HAIR - PINK ELEGANCE THEME ===== */
+
+/* Base & Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Pink Color Palette */
+    --soft-pink: #FFB6C1;          /* Light pink blush */
+    --baby-pink: #FFD1DC;          /* Very soft pink */
+    --rose-pink: #FFC0CB;          /* Classic pink */
+    --hot-pink: #FF69B4;           /* Bright pink */
+    --deep-pink: #FF1493;          /* Vivid pink */
+    --dusty-pink: #D8A3A3;         /* Muted pink */
+    --blush-pink: #F8C8DC;         /* Blush tone */
+    --fuchsia: #FF00FF;            /* Magenta pink */
+    --rose-gold: #B76E79;          /* Rose gold accent */
+    --pink-champagne: #F1DDCF;     /* Warm pink */
+    --cotton-candy: #FFBCD9;       /* Light candy pink */
+    --raspberry: #E30B5D;          /* Dark pink/red */
+    
+    /* Supporting Colors */
+    --charcoal: #2C2C2C;           /* Dark text */
+    --light-charcoal: #444444;     /* Medium text */
+    --off-white: #FFF5F7;          /* Pinkish white */
+    --success: #4CAF50;            /* Green */
+    --warning: #FF9800;            /* Orange */
+    --danger: #F44336;             /* Red */
+    --info: #2196F3;               /* Blue */
+    
+    /* Gradients */
+    --gradient-soft: linear-gradient(135deg, var(--baby-pink) 0%, var(--soft-pink) 100%);
+    --gradient-bold: linear-gradient(135deg, var(--hot-pink) 0%, var(--deep-pink) 100%);
+    --gradient-rose: linear-gradient(135deg, var(--rose-pink) 0%, var(--rose-gold) 100%);
+    --gradient-blush: linear-gradient(135deg, var(--blush-pink) 0%, var(--cotton-candy) 100%);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--charcoal);
+    background: linear-gradient(135deg, #FFF0F5 0%, #FFF5F7 100%);
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation - Pink & White Elegance */
+nav {
+    background: linear-gradient(135deg, var(--deep-pink) 0%, var(--hot-pink) 100%);
+    color: white;
+    padding: 1.2rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.2);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo i {
+    color: #FFD1DC;
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.nav-links a.active {
+    background: white;
+    color: var(--deep-pink);
+    font-weight: 600;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(255, 182, 193, 0.9), rgba(255, 192, 203, 0.9)),
+                url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+    border-bottom: 5px solid var(--hot-pink);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-shadow: 3px 3px 6px rgba(227, 11, 93, 0.3);
+}
+
+.hero .tagline {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: #FFE4E9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background: var(--gradient-bold);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    background: linear-gradient(135deg, var(--deep-pink) 0%, var(--hot-pink) 100%);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    border-color: white;
+}
+
+/* Services Section */
+.section-title {
+    text-align: center;
+    margin: 4rem 0 2rem;
+    position: relative;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    color: var(--deep-pink);
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-rose);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--light-charcoal);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+/* Services Grid - PROPERLY FIXED */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    padding-top: 60px; /* ADDED: Extra space at top for floating icons */
+}
+
+/* Service Wrapper - CRITICAL FIX */
+.service-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+/* Service Card - PROPERLY CONFIGURED */
+.service-card {
+    background: white;
+    border-radius: 20px;
+    overflow: visible; /* CRITICAL: Must be visible for icon to show outside */
+    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+    transition: all 0.3s ease;
+    border: 3px solid var(--soft-pink);
+    position: relative;
+    padding-top: 60px; /* FIXED: Space inside card for content below icon */
+    min-height: 400px;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
+    border-color: var(--hot-pink);
+}
+
+/* Service Icon - CRITICAL FLOATING POSITIONING */
+.service-icon {
+    position: absolute;
+    top: -60px; /* CRITICAL: Negative value floats icon ABOVE the card */
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--hot-pink), var(--deep-pink));
+    color: white;
+    font-size: 3rem; /* Larger emoji */
+    width: 120px; /* Bigger circle */
+    height: 120px; /* Bigger circle */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+    border: 5px solid white;
+    transition: all 0.3s ease;
+}
+
+.service-wrapper:hover .service-icon {
+    transform: translateX(-50%) scale(1.1) rotate(5deg);
+}
+
+.service-content {
+    padding: 1rem 2rem 2rem;
+    text-align: center;
+}
+
+.service-content h3 {
+    color: var(--deep-pink);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.service-description {
+    color: var(--light-charcoal);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.price-list {
+    background: linear-gradient(135deg, #FFF0F5 0%, #FFF5F7 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    border: 1px solid var(--baby-pink);
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--dusty-pink);
+}
+
+.price-item:last-child {
+    border-bottom: none;
+}
+
+.price-label {
+    color: var(--raspberry);
+    font-weight: 500;
+}
+
+.price-value {
+    color: var(--deep-pink);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.service-duration {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--soft-pink);
+    color: var(--raspberry);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+/* Booking Form */
+.booking-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(255, 182, 193, 0.2);
+    border: 1px solid var(--baby-pink);
+}
+
+.booking-header {
+    background: var(--gradient-bold);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 3px solid var(--rose-pink);
+}
+
+.booking-header h1 {
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(227, 11, 93, 0.3);
+}
+
+.booking-header p {
+    color: #FFE4E9;
+    opacity: 0.9;
+}
+
+.booking-form {
+    padding: 2rem;
+    background: linear-gradient(135deg, #FFF9FA 0%, #FFFDFE 100%);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--deep-pink);
+    font-weight: 600;
+}
+
+.form-group label::after {
+    content: ' *';
+    color: var(--danger);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--soft-pink);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    color: var(--charcoal);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--hot-pink);
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+    background: #FFF9FA;
+}
+
+/* Form select styling */
+.form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23FF69B4' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    padding-right: 40px;
+}
+
+/* Flash Messages */
+.flash-messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    max-width: 400px;
+}
+
+.flash-message {
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    animation: slideInRight 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(76, 175, 80, 0.7));
+    color: white;
+    border-left: 4px solid #4CAF50;
+}
+
+.alert-error {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.9), rgba(244, 67, 54, 0.7));
+    color: white;
+    border-left: 4px solid #F44336;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(33, 150, 243, 0.7));
+    color: white;
+    border-left: 4px solid #2196F3;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, var(--deep-pink) 0%, var(--hot-pink) 100%);
+    color: white;
+    padding: 4rem 0 2rem;
+    margin-top: 4rem;
+    border-top: 5px solid var(--rose-pink);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+}
+
+.footer-section h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.footer-section p {
+    color: #FFE4E9;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: #FFE4E9;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.9;
+}
+
+.footer-links a:hover {
+    color: white;
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #FFE4E9;
+    opacity: 0.9;
+}
+
+.contact-item:hover {
+    opacity: 1;
+}
+
+.contact-item i {
+    color: white;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-link:hover {
+    background: white;
+    color: var(--deep-pink);
+    transform: translateY(-3px) rotate(5deg);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFE4E9;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    
+    .nav-links a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero {
+        padding: 4rem 1rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+        padding: 12px 24px;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        padding-top: 80px; /* More space on mobile */
+    }
+    
+    .service-wrapper {
+        margin-bottom: 4rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--soft-pink);
+    border-radius: 50%;
+    border-top-color: var(--hot-pink);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Pink Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--baby-pink);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-bold);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--deep-pink);
+}
+
+/* Pink Focus Styles */
+:focus {
+    outline: 2px solid var(--hot-pink);
+    outline-offset: 2px;
+}
+
+/* Selection Color */
+::selection {
+    background-color: var(--soft-pink);
+    color: var(--charcoal);
+}
+
+/* Pink Hover Effects for Text */
+.hover-pink:hover {
+    color: var(--hot-pink) !important;
+    transition: color 0.3s ease;
+}
+
+/* Pink Badge */
+.pink-badge {
+    background: var(--gradient-blush);
+    color: var(--raspberry);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+/* Pink Quote */
+.pink-quote {
+    border-left: 4px solid var(--hot-pink);
+    padding-left: 1rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--light-charcoal);
+    background: linear-gradient(90deg, #FFF9FA 0%, transparent 100%);
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Pink Card Highlight */
+.pink-highlight {
+    position: relative;
+}
+
+.pink-highlight::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-blush);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pink-highlight:hover::before {
+    opacity: 1;
+}
+
+/* Pink Pulse Animation */
+@keyframes pinkPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 105, 180, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
+    }
+}
+
+.pink-pulse {
+    animation: pinkPulse 2s infinite;
+}
+
+/* Pink Gradient Text */
+.gradient-text {
+    background: var(--gradient-bold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Pink Glass Effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+/* Pink Shadow */
+.pink-shadow {
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+}
+
+/* Pink Border Animation */
+.pink-border-animate {
+    position: relative;
+    overflow: hidden;
+}
+
+.pink-border-animate::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-bold);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.pink-border-animate:hover::after {
+    transform: translateX(0);
+}
+.btn-pink:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
+}

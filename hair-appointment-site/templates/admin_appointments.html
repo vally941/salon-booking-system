@@ -1,0 +1,347 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Appointments{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section-title">
+        <h2><i class="fas fa-clipboard-list"></i> Appointment Management</h2>
+        <p class="section-subtitle">View and manage all customer appointments</p>
+    </div>
+    
+    <!-- Admin-specific flash messages (optional override) -->
+    <div id="admin-flash-messages" style="margin-bottom: 20px;">
+        <!-- This will be filled by JavaScript from base.html messages -->
+    </div>
+    
+    {% if appointments %}
+        <div class="appointments-table-container">
+            <table class="appointments-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Service</th>
+                        <th>Date & Time</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>#{{ appointment.id }}</td>
+                        <td>
+                            <strong>{{ appointment.customer_name }}</strong><br>
+                            {% if appointment.special_requests %}
+                                <small style="color: #666;">{{ appointment.special_requests|truncate(30) }}</small>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ appointment.service_type }}<br>
+                            {% if appointment.braid_size %}
+                                <small style="color: #666;">Size: {{ appointment.braid_size }}</small>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ appointment.appointment_date.strftime('%b %d, %Y') }}<br>
+                            <small>{{ appointment.appointment_time }}</small>
+                        </td>
+                        <td>
+                            {{ appointment.customer_email }}<br>
+                            {{ appointment.customer_phone }}
+                        </td>
+                        <td>
+                            <span class="status-badge status-{{ appointment.status }}">
+                                {{ appointment.status|title }}
+                            </span>
+                        </td>
+                        <td class="actions">
+                            {% if appointment.status == 'pending' %}
+                                <a href="{{ url_for('confirm_appointment', appointment_id=appointment.id, key='vally123') }}" 
+                                   class="btn-confirm"
+                                   onclick="return confirm('Confirm appointment #{{ appointment.id }}?')">
+                                    <i class="fas fa-check"></i> Confirm
+                                </a>
+                                <a href="{{ url_for('cancel_appointment', appointment_id=appointment.id, key='vally123') }}" 
+                                   class="btn-cancel"
+                                   onclick="return confirm('Cancel appointment #{{ appointment.id }}?')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </a>
+                            {% elif appointment.status == 'confirmed' %}
+                                <a href="{{ url_for('cancel_appointment', appointment_id=appointment.id, key='vally123') }}" 
+                                   class="btn-cancel"
+                                   onclick="return confirm('Cancel appointment #{{ appointment.id }}?')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 2rem; text-align: center; color: #666;">
+                <p><i class="fas fa-info-circle"></i> Total appointments: {{ appointments|length }}</p>
+                <p style="margin-top: 10px;">
+                    <span style="background: #fff3cd; padding: 5px 10px; border-radius: 4px; margin-right: 10px;">
+                        Pending: {{ appointments|selectattr('status', 'equalto', 'pending')|list|length }}
+                    </span>
+                    <span style="background: #d4edda; padding: 5px 10px; border-radius: 4px; margin-right: 10px;">
+                        Confirmed: {{ appointments|selectattr('status', 'equalto', 'confirmed')|list|length }}
+                    </span>
+                    <span style="background: #f8d7da; padding: 5px 10px; border-radius: 4px;">
+                        Cancelled: {{ appointments|selectattr('status', 'equalto', 'cancelled')|list|length }}
+                    </span>
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <div class="no-appointments" style="text-align: center; padding: 3rem;">
+            <div style="font-size: 4rem; color: #ccc; margin-bottom: 1rem;">
+                <i class="fas fa-calendar-times"></i>
+            </div>
+            <h3>No Appointments Yet</h3>
+            <p style="color: #666; margin: 1rem 0 2rem;">No customers have booked appointments yet.</p>
+            <a href="{{ url_for('home') }}" class="btn btn-primary">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    /* Override for admin page */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 30px;
+        background: linear-gradient(135deg, #4a235a, #2c3e50);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .section-title h2 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        margin-top: 5px;
+        opacity: 0.9;
+        font-size: 1rem;
+    }
+    
+    .appointments-table-container {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+    
+    .appointments-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+    }
+    
+    .appointments-table th {
+        background: #f8f9fa;
+        color: #495057;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+    }
+    
+    .appointments-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #e9ecef;
+        vertical-align: top;
+    }
+    
+    .appointments-table tr:hover {
+        background: #f8f9fa;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        min-width: 85px;
+        text-align: center;
+    }
+    
+    .status-pending {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+    }
+    
+    .status-confirmed {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    
+    .status-cancelled {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+    
+    .actions {
+        display: flex;
+        gap: 8px;
+    }
+    
+    .btn-confirm,
+    .btn-cancel {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    
+    .btn-confirm {
+        background: #28a745;
+        color: white;
+        border: none;
+    }
+    
+    .btn-confirm:hover {
+        background: #218838;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(40, 167, 69, 0.3);
+    }
+    
+    .btn-cancel {
+        background: #dc3545;
+        color: white;
+        border: none;
+    }
+    
+    .btn-cancel:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(220, 53, 69, 0.3);
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #4a235a;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+    
+    .btn:hover {
+        background: #2c3e50;
+    }
+    
+    .btn-primary {
+        background: #4a235a;
+    }
+    
+    .btn-primary:hover {
+        background: #2c3e50;
+    }
+    
+    .no-appointments {
+        background: white;
+        padding: 3rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }
+    
+    @media (max-width: 768px) {
+        .appointments-table {
+            display: block;
+            font-size: 0.9rem;
+        }
+        
+        .appointments-table th,
+        .appointments-table td {
+            padding: 0.75rem 0.5rem;
+        }
+        
+        .actions {
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .btn-confirm,
+        .btn-cancel {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script>
+    // Move flash messages to admin container for better positioning
+    document.addEventListener('DOMContentLoaded', function() {
+        const flashContainer = document.getElementById('admin-flash-messages');
+        const baseFlashMessages = document.querySelector('.flash-messages');
+        
+        if (flashContainer && baseFlashMessages) {
+            // Copy flash messages to admin container
+            const messages = baseFlashMessages.querySelectorAll('.flash-message');
+            messages.forEach(message => {
+                const clone = message.cloneNode(true);
+                clone.style.position = 'relative';
+                clone.style.top = '0';
+                clone.style.right = '0';
+                clone.style.maxWidth = '100%';
+                clone.style.animation = 'none';
+                flashContainer.appendChild(clone);
+            });
+            
+            // Clear the fixed position messages after a delay
+            setTimeout(() => {
+                baseFlashMessages.innerHTML = '';
+            }, 100);
+        }
+        
+        // Add admin-specific confirmation for actions
+        const confirmLinks = document.querySelectorAll('.btn-confirm');
+        const cancelLinks = document.querySelectorAll('.btn-cancel');
+        
+        confirmLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!confirm('Are you sure you want to confirm this appointment?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+        
+        cancelLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!confirm('Are you sure you want to cancel this appointment?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

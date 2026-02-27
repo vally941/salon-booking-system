@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+{% block title %}Register - Vally's Divine Hair{% endblock %}
+
+{% block content %}
+<section class="auth-container">
+    <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">
+        Join Vally's Divine Hair family today!
+    </p>
+    
+    <form method="POST" id="registerForm" action="{{ url_for('register') }}">
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; color: #ff69b4; font-weight: bold;">
+                <i class="fas fa-user"></i> Username
+            </label>
+            <input type="text" name="username" id="username" required 
+                   placeholder="Choose a username"
+                   style="width: 100%; padding: 12px; border: 2px solid #ffe5f3; border-radius: 8px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; color: #ff69b4; font-weight: bold;">
+                <i class="fas fa-envelope"></i> Email Address
+            </label>
+            <input type="email" name="email" id="email" required 
+                   placeholder="your@email.com"
+                   style="width: 100%; padding: 12px; border: 2px solid #ffe5f3; border-radius: 8px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; color: #ff69b4; font-weight: bold;">
+                <i class="fas fa-lock"></i> Password
+            </label>
+            <div style="position: relative;">
+                <input type="password" name="password" id="password" required 
+                       placeholder="Create a strong password"
+                       style="width: 100%; padding: 12px; padding-right: 45px; border: 2px solid #ffe5f3; border-radius: 8px; box-sizing: border-box;">
+                <i class="fas fa-eye" id="togglePassword" 
+                   style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #999;"
+                   onclick="togglePasswordVisibility()"></i>
+            </div>
+        </div>
+
+        <!-- Password Requirements Box -->
+        <div style="
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        ">
+            <p style="margin: 0 0 10px 0; color: #856404; font-weight: bold;">
+                <i class="fas fa-shield-alt"></i> Password Requirements:
+            </p>
+            <ul id="passwordRequirements" style="margin: 0; padding-left: 20px; color: #856404; font-size: 0.9rem;">
+                <li id="req-length" class="invalid">
+                    <i class="fas fa-times-circle"></i> At least 8 characters
+                </li>
+                <li id="req-uppercase" class="invalid">
+                    <i class="fas fa-times-circle"></i> One uppercase letter (A-Z)
+                </li>
+                <li id="req-lowercase" class="invalid">
+                    <i class="fas fa-times-circle"></i> One lowercase letter (a-z)
+                </li>
+                <li id="req-number" class="invalid">
+                    <i class="fas fa-times-circle"></i> One number (0-9)
+                </li>
+                <li id="req-special" class="invalid">
+                    <i class="fas fa-times-circle"></i> One special character (!@#$%^&*()_+-=[]{}|;:,.<>?)
+                </li>
+            </ul>
+        </div>
+
+        <!-- Password Strength Indicator -->
+        <div style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span style="font-size: 0.85rem; color: #666;">Password Strength:</span>
+                <span id="strengthText" style="font-size: 0.85rem; font-weight: bold; color: #999;">-</span>
+            </div>
+            <div style="height: 8px; background: #f0f0f0; border-radius: 10px; overflow: hidden;">
+                <div id="strengthBar" style="height: 100%; width: 0%; transition: all 0.3s; border-radius: 10px;"></div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; color: #ff69b4; font-weight: bold;">
+                <i class="fas fa-lock"></i> Confirm Password
+            </label>
+            <input type="password" name="confirm_password" id="confirm_password" required 
+                   placeholder="Re-enter your password"
+                   style="width: 100%; padding: 12px; border: 2px solid #ffe5f3; border-radius: 8px; box-sizing: border-box;">
+            <small id="passwordMatch" style="display: block; margin-top: 5px;"></small>
+        </div>
+
+        <button type="submit" id="submitBtn" disabled style="
+            width: 100%;
+            padding: 15px;
+            background: #ccc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: not-allowed;
+            transition: all 0.3s;
+        ">
+            <i class="fas fa-user-plus"></i> Create Account
+        </button>
+    </form>
+    
+    <div style="margin-top: 20px; text-align: center;">
+        <p>Already have an account? 
+            <a href="{{ url_for('login') }}" style="color: #ff69b4; font-weight: bold; text-decoration: underline;">
+                Login here
+            </a>
+        </p>
+        <p style="margin-top: 10px;">
+            <a href="{{ url_for('home') }}" style="color: #666;">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </p>
+    </div>
+</section>
+
+<script>
+const password = document.getElementById('password');
+const confirmPassword = document.getElementById('confirm_password');
+const submitBtn = document.getElementById('submitBtn');
+const strengthBar = document.getElementById('strengthBar');
+const strengthText = document.getElementById('strengthText');
+
+// Password requirements
+const requirements = {
+    length: { regex: /.{8,}/, element: 'req-length' },
+    uppercase: { regex: /[A-Z]/, element: 'req-uppercase' },
+    lowercase: { regex: /[a-z]/, element: 'req-lowercase' },
+    number: { regex: /[0-9]/, element: 'req-number' },
+    special: { regex: /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/, element: 'req-special' }
+};
+
+let validRequirements = 0;
+
+// Check password requirements
+password.addEventListener('input', function() {
+    const pass = this.value;
+    validRequirements = 0;
+    
+    // Check each requirement
+    for (let key in requirements) {
+        const req = requirements[key];
+        const element = document.getElementById(req.element);
+        const icon = element.querySelector('i');
+        
+        if (req.regex.test(pass)) {
+            element.classList.remove('invalid');
+            element.classList.add('valid');
+            element.style.color = '#28a745';
+            icon.className = 'fas fa-check-circle';
+            validRequirements++;
+        } else {
+            element.classList.remove('valid');
+            element.classList.add('invalid');
+            element.style.color = '#856404';
+            icon.className = 'fas fa-times-circle';
+        }
+    }
+    
+    // Update strength bar
+    updateStrengthBar(validRequirements);
+    
+    // Check if can submit
+    checkFormValidity();
+});
+
+// Update strength bar
+function updateStrengthBar(count) {
+    const percentage = (count / 5) * 100;
+    strengthBar.style.width = percentage + '%';
+    
+    if (count === 0) {
+        strengthBar.style.background = '#f0f0f0';
+        strengthText.textContent = '-';
+        strengthText.style.color = '#999';
+    } else if (count <= 2) {
+        strengthBar.style.background = '#dc3545';
+        strengthText.textContent = 'Weak';
+        strengthText.style.color = '#dc3545';
+    } else if (count <= 3) {
+        strengthBar.style.background = '#ffc107';
+        strengthText.textContent = 'Fair';
+        strengthText.style.color = '#ffc107';
+    } else if (count <= 4) {
+        strengthBar.style.background = '#17a2b8';
+        strengthText.textContent = 'Good';
+        strengthText.style.color = '#17a2b8';
+    } else {
+        strengthBar.style.background = '#28a745';
+        strengthText.textContent = 'Strong';
+        strengthText.style.color = '#28a745';
+    }
+}
+
+// Check password match
+confirmPassword.addEventListener('input', function() {
+    const match = document.getElementById('passwordMatch');
+    
+    if (this.value === '') {
+        match.textContent = '';
+    } else if (this.value === password.value) {
+        match.innerHTML = '<i class="fas fa-check-circle"></i> Passwords match!';
+        match.style.color = '#28a745';
+    } else {
+        match.innerHTML = '<i class="fas fa-times-circle"></i> Passwords do not match';
+        match.style.color = '#dc3545';
+    }
+    
+    checkFormValidity();
+});
+
+// Toggle password visibility
+function togglePasswordVisibility() {
+    const icon = document.getElementById('togglePassword');
+    
+    if (password.type === 'password') {
+        password.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+    } else {
+        password.type = 'password';
+        icon.className = 'fas fa-eye';
+    }
+}
+
+// Check if form can be submitted
+function checkFormValidity() {
+    const allValid = validRequirements === 5;
+    const passwordsMatch = password.value === confirmPassword.value && confirmPassword.value !== '';
+    const usernameValid = document.getElementById('username').value.trim() !== '';
+    const emailValid = document.getElementById('email').value.trim() !== '';
+    
+    if (allValid && passwordsMatch && usernameValid && emailValid) {
+        submitBtn.disabled = false;
+        submitBtn.style.background = 'linear-gradient(135deg, #ff69b4 0%, #ff85c1 100%)';
+        submitBtn.style.cursor = 'pointer';
+        submitBtn.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.3)';
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.style.background = '#ccc';
+        submitBtn.style.cursor = 'not-allowed';
+        submitBtn.style.boxShadow = 'none';
+    }
+}
+
+// Add input listeners to username and email for form validation
+document.getElementById('username').addEventListener('input', checkFormValidity);
+document.getElementById('email').addEventListener('input', checkFormValidity);
+
+// Prevent form submission if requirements not met
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    if (validRequirements !== 5) {
+        e.preventDefault();
+        alert('❌ Please meet all password requirements!');
+    } else if (password.value !== confirmPassword.value) {
+        e.preventDefault();
+        alert('❌ Passwords do not match!');
+    }
+});
+</script>
+
+<style>
+.auth-container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#submitBtn:not(:disabled):hover {
+    transform: scale(1.02);
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff69b4 !important;
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,510 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Vally's Divine Hair{% endblock %}
+
+{% block content %}
+<style>
+    /* Bold & Eye-Catching Contact Page Styles */
+    .contact-wrapper {
+        background: linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ff1493 100%);
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(255, 20, 147, 0.4);
+        animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+        0%, 100% {
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.4);
+        }
+        50% {
+            box-shadow: 0 20px 80px rgba(255, 20, 147, 0.6);
+        }
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        border: 5px solid #ff1493;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transform: rotate(-1deg);
+        animation: wiggle 4s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+        0%, 100% { transform: rotate(-1deg); }
+        50% { transform: rotate(1deg); }
+    }
+
+    .section-title h2 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: #ff1493;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 3px 3px 0px #ffb6c1, 6px 6px 0px #ff69b4;
+        margin: 0 0 1rem 0;
+        animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .section-subtitle {
+        font-size: 1.5rem;
+        color: #333;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin: 3rem 0;
+    }
+
+    .contact-form-section h3,
+    .contact-info-section h3 {
+        font-size: 2rem;
+        font-weight: 900;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+        animation: slideInLeft 1s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .contact-form {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 20px;
+        border: 5px dashed #ff1493;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: #ff1493;
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 0px #ffb6c1;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        border: 4px solid #ff69b4;
+        border-radius: 10px;
+        background: #fff5f8;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #ff1493;
+        background: white;
+        transform: scale(1.03);
+        box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 150px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #ff1493, #ff69b4, #ff1493);
+        background-size: 200% 200%;
+        color: white;
+        padding: 1.5rem 3rem;
+        font-size: 1.6rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+        transition: all 0.3s ease;
+        animation: gradientShift 3s ease infinite;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .btn-primary:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .btn-primary:hover:before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn-primary:hover {
+        transform: scale(1.05) rotate(-2deg);
+        box-shadow: 0 15px 40px rgba(255, 20, 147, 0.7);
+    }
+
+    .btn-primary i {
+        margin-right: 10px;
+        font-size: 1.8rem;
+    }
+
+    .btn-secondary {
+        background: linear-gradient(135deg, #9370db, #ba55d3);
+        color: white;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 30px;
+        box-shadow: 0 8px 20px rgba(147, 112, 219, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(147, 112, 219, 0.6);
+    }
+
+    .contact-info-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        border: 5px solid #ff69b4;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #fff5f8 0%, #ffe4f1 100%);
+        border-radius: 15px;
+        border: 3px solid #ffb6c1;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .info-item:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+    }
+
+    .info-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #ff1493, #ff69b4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    .info-icon i {
+        color: white;
+        font-size: 2rem;
+    }
+
+    .info-content h4 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #ff1493;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .info-content p {
+        margin: 0;
+        color: #333;
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.6;
+    }
+
+    .info-content strong {
+        color: #ff1493;
+        font-size: 1.3rem;
+    }
+
+    .quick-response {
+        margin-top: 2rem;
+        padding: 2rem;
+        border-top: 4px dashed #ff69b4;
+        background: linear-gradient(135deg, #fff 0%, #fff5f8 100%);
+        border-radius: 15px;
+        animation: fadeIn 1.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .quick-response h4 {
+        color: #ff1493;
+        margin-bottom: 1rem;
+        font-size: 1.6rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .quick-response p {
+        color: #666;
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.6;
+    }
+
+    .login-required {
+        text-align: center;
+        padding: 4rem;
+        background: linear-gradient(135deg, #fff 0%, #ffb6c1 100%);
+        border-radius: 20px;
+        margin: 2rem 0;
+        border: 5px solid #ff1493;
+        box-shadow: 0 15px 40px rgba(255, 20, 147, 0.3);
+    }
+
+    .login-required i {
+        font-size: 6rem;
+        color: #ff1493;
+        animation: shake 2s ease-in-out infinite;
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(-10deg); }
+        75% { transform: rotate(10deg); }
+    }
+
+    .login-required h3 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #ff1493;
+        margin: 1.5rem 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .login-required p {
+        font-size: 1.3rem;
+        color: #666;
+        font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+        }
+
+        .btn-primary {
+            font-size: 1.3rem;
+            padding: 1.3rem 2rem;
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+        }
+    }
+</style>
+
+<div class="contact-wrapper">
+    <div class="section-title">
+        <h2>✨ Contact Us ✨</h2>
+        <p class="section-subtitle">Get in touch for bookings and inquiries</p>
+    </div>
+    
+    {% if not current_user.is_authenticated %}
+    <div class="login-required">
+        <div>
+            <i class="fas fa-lock"></i>
+        </div>
+        <h3>🔐 Login Required 🔐</h3>
+        <p>You need to be logged in to contact us.</p>
+        <div style="margin-top: 2.5rem;">
+            <a href="{{ url_for('login') }}" class="btn btn-primary" style="margin-right: 15px; width: auto; display: inline-block;">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="{{ url_for('register') }}" class="btn btn-secondary" style="display: inline-block;">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <div class="contact-grid">
+        <div class="contact-form-section">
+            <h3>💌 Send us a message</h3>
+            
+            <form method="POST" action="{{ url_for('contact') }}" class="contact-form">
+                <div class="form-group">
+                    <label for="contact-name">👤 Your Name</label>
+                    <input type="text" id="contact-name" name="name" required 
+                           value="{{ current_user.username }}"
+                           placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-email">📧 Email Address</label>
+                    <input type="email" id="contact-email" name="email" required 
+                           value="{{ current_user.email }}"
+                           placeholder="your@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-phone">📱 Phone Number</label>
+                    <input type="tel" id="contact-phone" name="phone" 
+                           placeholder="066 403 6257">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-subject">📝 Subject</label>
+                    <input type="text" id="contact-subject" name="subject" 
+                           placeholder="e.g., Booking Inquiry">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-message">💬 Message</label>
+                    <textarea id="contact-message" name="message" rows="5" required 
+                              placeholder="Your message here..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+        
+        <div class="contact-info-section">
+            <h3>📞 Contact Information</h3>
+            
+            <div class="contact-info-card">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Phone Number</h4>
+                        <p><strong>066 403 6257</strong></p>
+                        <p style="font-size: 0.95rem; color: #666; margin-top: 0.5rem;">
+                            📞 Call us anytime!
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Business Hours</h4>
+                        <p>
+                            Monday - Friday: <strong>9:00 AM - 7:00 PM</strong><br>
+                            Saturday: <strong>9:00 AM - 5:00 PM</strong><br>
+                            Sunday: <strong>Closed</strong> 🌙
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Location</h4>
+                        <p>
+                            <strong>Nhlazatshe no2</strong><br>
+                            📍 (By appointment only)
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="quick-response">
+                    <h4>⚡ Quick Response</h4>
+                    <p>
+                        We typically respond to messages within <strong>2-4 hours</strong> during business hours. 
+                        For urgent matters, please call us directly! 🚀
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

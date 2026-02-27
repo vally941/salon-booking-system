@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work - Vally's Divine Hair</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-pink: #ff69b4;
+            --light-pink: #ffb6c1;
+            --dark-pink: #db7093;
+            --soft-pink: #ffe4e1;
+            --pink-gradient: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            --light-gradient: linear-gradient(135deg, #ffe4e1 0%, #fff0f5 100%);
+        }
+        
+        body {
+            background: var(--light-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: var(--pink-gradient);
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+        }
+        
+        .page-title {
+            color: var(--dark-pink);
+            font-weight: 700;
+            margin: 40px 0 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--pink-gradient);
+            border-radius: 2px;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 105, 208, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
+        }
+        
+        .portfolio-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 3px solid var(--light-pink);
+        }
+        
+        .portfolio-content {
+            padding: 25px;
+        }
+        
+        .portfolio-badge {
+            background: var(--soft-pink);
+            color: var(--dark-pink);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-title {
+            color: var(--dark-pink);
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .portfolio-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--pink-gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .no-jobs {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(215, 42, 158, 0.1);
+        }
+        
+        .no-jobs i {
+            font-size: 100px;
+            background: var(--pink-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--light-pink);
+            color: var(--dark-pink);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--pink-gradient);
+            color: white;
+            border-color: var(--primary-pink);
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-pink);
+        }
+        
+        .stats-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 99999;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .fullscreen-modal.active {
+            display: block;
+        }
+        
+        .fullscreen-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: var(--primary-pink);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+        
+        .fullscreen-close:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .fullscreen-content {
+            max-width: 1200px;
+            margin: 80px auto 40px;
+            text-align: center;
+        }
+        
+        .fullscreen-image {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(255, 105, 180, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        .fullscreen-info {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .fullscreen-info h3 {
+            color: var(--primary-pink);
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .fullscreen-info .service-badge {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--pink-gradient);
+            color: white;
+            border-radius: 25px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .fullscreen-info p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+        
+        .fullscreen-info .date-info {
+            color: #999;
+            font-size: 1rem;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        footer {
+            background: var(--pink-gradient);
+            color: white;
+            margin-top: 80px;
+            padding: 40px 0;
+            box-shadow: 0 -4px 15px rgba(255, 105, 180, 0.2);
+        }
+        
+        footer h5 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        footer hr {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        footer .text-center {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .fullscreen-close {
+                width: 50px;
+                height: 50px;
+                font-size: 2rem;
+                top: 10px;
+                right: 10px;
+            }
+
+            .fullscreen-content {
+                margin: 60px auto 20px;
+            }
+
+            .fullscreen-image {
+                max-height: 50vh;
+            }
+
+            .fullscreen-info {
+                padding: 25px 20px;
+            }
+
+            .fullscreen-info h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="fas fa-crown me-2"></i>Vally's Divine Hair
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('services') }}"><i class="fas fa-cut me-1"></i> Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('portfolio') }}"><i class="fas fa-images me-1"></i> Our Work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('book') }}"><i class="fas fa-calendar-plus me-1"></i> Book Now</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('my_appointments') }}"><i class="fas fa-calendar-check me-1"></i> My Appointments</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle me-1"></i> {{ current_user.username }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% if current_user.is_admin %}
+                                    <li><a class="dropdown-item" href="{{ url_for('admin_dashboard') }}"><i class="fas fa-tachometer-alt me-2"></i> Admin Dashboard</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                {% endif %}
+                                <li><a class="dropdown-item" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">
+            <i class="fas fa-images me-3"></i>Our Work & Portfolio
+        </h1>
+        
+        <p class="text-center text-muted mb-4" style="max-width: 800px; margin: 0 auto;">
+            Browse through our gallery of completed work. Each piece showcases our dedication to quality and attention to detail.
+        </p>
+        
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ jobs|length }}</div>
+                    <div class="stats-label">Total Projects</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ jobs|selectattr('featured')|list|length }}</div>
+                    <div class="stats-label">Featured Works</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ (jobs|groupby('service_type')|list)|length }}</div>
+                    <div class="stats-label">Service Types</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Work</button>
+            <button class="filter-btn" data-filter="Long Knotless Braids">Long Braids</button>
+            <button class="filter-btn" data-filter="Short Knotless Braids">Short Braids</button>
+            <button class="filter-btn" data-filter="Cluster Lashes">Lashes</button>
+            <button class="filter-btn" data-filter="Other">Other</button>
+        </div>
+        
+        {% if jobs %}
+            <div class="row" id="portfolio-grid">
+                {% for job in jobs %}
+                <div class="col-lg-4 col-md-6 portfolio-item-container" data-service="{{ job.service_type }}" data-index="{{ loop.index0 }}">
+                    <div class="portfolio-item" onclick="openFullscreen({{ loop.index0 }})">
+                        {% if job.featured %}
+                            <div class="featured-badge">
+                                <i class="fas fa-star me-1"></i>Featured
+                            </div>
+                        {% endif %}
+                        
+                        {% if job.image_url %}
+                            <img src="{{ url_for('static', filename=job.image_url) }}" 
+                                 alt="{{ job.title }}" 
+                                 class="portfolio-img">
+                        {% else %}
+                            <div class="portfolio-img d-flex align-items-center justify-content-center" 
+                                 style="background: var(--soft-pink);">
+                                <i class="fas fa-image fa-4x" style="color: var(--light-pink);"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="portfolio-content">
+                            <span class="portfolio-badge">{{ job.service_type }}</span>
+                            <h3 class="portfolio-title">{{ job.title }}</h3>
+                            <p class="portfolio-description">{{ job.description|truncate(150) if job.description else '' }}</p>
+                            <div class="portfolio-date">
+                                <i class="far fa-calendar me-2"></i>Completed {{ job.created_at.strftime('%B %Y') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-jobs">
+                <i class="fas fa-images"></i>
+                <h3 class="mb-3" style="color: var(--dark-pink);">Portfolio Coming Soon</h3>
+                <p class="text-muted mb-4">We're currently working on adding our completed work to this gallery. Check back soon!</p>
+                <a href="{{ url_for('services') }}" class="btn" style="background: var(--pink-gradient); color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none;">
+                    <i class="fas fa-cut me-2"></i>View Our Services
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="fullscreen-modal" id="fullscreenModal" onclick="closeIfOutside(event)">
+        <button class="fullscreen-close" onclick="closeFullscreen(); event.stopPropagation();">&times;</button>
+        <div class="fullscreen-content" onclick="event.stopPropagation()">
+            <img id="fullscreenImage" class="fullscreen-image" src="" alt="">
+            <div class="fullscreen-info" id="fullscreenInfo"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-crown me-2"></i> Vally's Divine Hair</h5>
+                    <p class="mb-0">Premium hair braiding and styling services with elegance and style.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-1"><i class="fas fa-phone me-2"></i> 066-403-6257</p>
+                    <p class="mb-1"><i class="fas fa-envelope me-2"></i> valvenciaalice425@gmail.com</p>
+                    <p class="mb-0"><i class="fas fa-clock me-2"></i> Mon-Sat: 9AM-6PM</p>
+                </div>
+            </div>
+            <hr class="my-3">
+            <p class="text-center mb-0">
+                &copy; 2025 Vally's Divine Hair. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var portfolioData = [];
+        {% for job in jobs %}
+        portfolioData.push({
+            id: {{ job.id }},
+            title: "{{ job.title|e }}",
+            description: "{{ job.description|e if job.description else '' }}",
+            service_type: "{{ job.service_type|e }}",
+            image_url: "{{ job.image_url|e if job.image_url else '' }}",
+            created_at: "{{ job.created_at.strftime('%B %Y') }}"
+        });
+        {% endfor %}
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item-container');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    portfolioItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-service') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            portfolioItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        function openFullscreen(index) {
+            var job = portfolioData[index];
+            var modal = document.getElementById('fullscreenModal');
+            var image = document.getElementById('fullscreenImage');
+            var info = document.getElementById('fullscreenInfo');
+
+            if (job.image_url) {
+                image.src = "{{ url_for('static', filename='') }}" + job.image_url;
+            }
+
+            var infoHTML = '<h3>' + job.title + '</h3>';
+            infoHTML += '<span class="service-badge">' + job.service_type + '</span>';
+            
+            if (job.description) {
+                infoHTML += '<p>' + job.description + '</p>';
+            }
+            
+            infoHTML += '<p class="date-info">Completed ' + job.created_at + '</p>';
+
+            info.innerHTML = infoHTML;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen() {
+            var modal = document.getElementById('fullscreenModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeIfOutside(event) {
+            if (event.target.id === 'fullscreenModal') {
+                closeFullscreen();
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

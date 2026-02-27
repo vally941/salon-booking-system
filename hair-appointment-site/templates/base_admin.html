@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vally's Divine Hair{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== VALLY'S DIVINE HAIR - PINK ELEGANCE THEME ===== */
+
+        /* Base & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Pink Color Palette */
+            --soft-pink: #FFB6C1;
+            --baby-pink: #FFD1DC;
+            --rose-pink: #FFC0CB;
+            --hot-pink: #FF69B4;
+            --deep-pink: #FF1493;
+            --dusty-pink: #D8A3A3;
+            --blush-pink: #F8C8DC;
+            --fuchsia: #FF00FF;
+            --rose-gold: #B76E79;
+            --pink-champagne: #F1DDCF;
+            --cotton-candy: #FFBCD9;
+            --raspberry: #E30B5D;
+            
+            /* Supporting Colors */
+            --charcoal: #2C2C2C;
+            --light-charcoal: #444444;
+            --off-white: #FFF5F7;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --info: #2196F3;
+            
+            /* Gradients */
+            --gradient-soft: linear-gradient(135deg, var(--baby-pink) 0%, var(--soft-pink) 100%);
+            --gradient-bold: linear-gradient(135deg, var(--hot-pink) 0%, var(--deep-pink) 100%);
+            --gradient-rose: linear-gradient(135deg, var(--rose-pink) 0%, var(--rose-gold) 100%);
+            --gradient-blush: linear-gradient(135deg, var(--blush-pink) 0%, var(--cotton-candy) 100%);
+            --light-gradient: linear-gradient(135deg, #FFF0F5 0%, #FFF5F7 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background: var(--light-gradient);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--gradient-bold);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo:hover {
+            opacity: 0.9;
+        }
+
+        .logo i {
+            color: #FFD1DC;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a, .nav-user {
+            padding: 8px 16px;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+        }
+
+        .nav-user {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+        }
+
+        .admin-badge {
+            background-color: #ffd700;
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            margin-top: 5px;
+            z-index: 1000;
+            overflow: hidden;
+            border: none;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--soft-pink);
+            color: var(--deep-pink);
+        }
+
+        .dropdown-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            color: var(--deep-pink);
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+        }
+
+        /* Flash messages */
+        .flash-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .flash-message {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .flash-message.alert-success {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(76, 175, 80, 0.7));
+            color: white;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .flash-message.alert-error {
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.9), rgba(244, 67, 54, 0.7));
+            color: white;
+            border-left: 4px solid #F44336;
+        }
+
+        .flash-message.alert-warning {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(255, 152, 0, 0.7));
+            color: white;
+            border-left: 4px solid #FF9800;
+        }
+
+        .flash-message.alert-info {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(33, 150, 243, 0.7));
+            color: white;
+            border-left: 4px solid #2196F3;
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 400px);
+            padding: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-bold);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            border-top: 5px solid var(--rose-pink);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section p {
+            color: #FFE4E9;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        footer a {
+            color: #FFE4E9;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        footer a:hover {
+            color: white;
+            opacity: 1;
+            text-decoration: none;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links a:hover {
+            background-color: white;
+            color: var(--deep-pink);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFE4E9;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Auth container */
+        .auth-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 2rem;
+            border: 1px solid var(--baby-pink);
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+        }
+
+        .auth-container input {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px solid var(--soft-pink);
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .auth-container input:focus {
+            outline: none;
+            border-color: var(--hot-pink);
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+        }
+
+        .auth-container button {
+            width: 100%;
+            padding: 14px;
+            background: var(--gradient-bold);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .auth-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--deep-pink);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(rgba(255, 182, 193, 0.9), rgba(255, 192, 203, 0.9)),
+                        url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            border-bottom: 5px solid var(--hot-pink);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(227, 11, 93, 0.3);
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #FFE4E9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--gradient-bold);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+            background: linear-gradient(135deg, var(--deep-pink) 0%, var(--hot-pink) 100%);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            border-color: white;
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-pink {
+            background: var(--gradient-bold);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-pink:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            text-decoration: none;
+        }
+
+        /* ===== SERVICE CARDS WITH FLOATING ICONS - THE FIX ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .service-wrapper {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: visible;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+            transition: all 0.3s ease;
+            border: 3px solid var(--soft-pink);
+            position: relative;
+            padding-top: 60px;
+            height: 550px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
+            border-color: var(--hot-pink);
+        }
+
+        .service-icon {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--hot-pink), var(--deep-pink));
+            color: white;
+            font-size: 3rem;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+            border: 5px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .service-wrapper:hover .service-icon {
+            transform: translateX(-50%) scale(1.1) rotate(5deg);
+        }
+
+        .service-content {
+            padding: 1rem 2rem 2rem;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-content h3 {
+            color: var(--deep-pink);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-description {
+            color: var(--light-charcoal);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .price-list {
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFF5F7 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid var(--baby-pink);
+            min-height: 160px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--dusty-pink);
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-label {
+            color: var(--raspberry);
+            font-weight: 500;
+        }
+
+        .price-value {
+            color: var(--deep-pink);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .service-duration {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--soft-pink);
+            color: var(--raspberry);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: auto;
+            font-weight: 500;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--deep-pink);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-rose);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--light-charcoal);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* ===== PORTFOLIO ===== */
+        .badge.bg-pink {
+            background: var(--gradient-bold);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .portfolio-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+            background: white;
+            border: 1px solid var(--baby-pink);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .flash-messages {
+                left: 20px;
+                right: 20px;
+                max-width: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                padding-top: 80px;
+            }
+            
+            .service-wrapper {
+                margin-bottom: 4rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+                padding: 12px 24px;
+            }
+        }
+
+        /* Pink Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--baby-pink);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-bold);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--deep-pink);
+        }
+
+        /* Selection Color */
+        ::selection {
+            background-color: var(--soft-pink);
+            color: var(--charcoal);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="{{ url_for('home') }}" class="logo">
+                <i class="fas fa-crown"></i> Vally's Divine Hair
+            </a>
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+                <a href="{{ url_for('services') }}"><i class="fas fa-spa"></i> Services</a>
+                
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('book') }}"><i class="fas fa-calendar-alt"></i> Book Now</a>
+                    <a href="{{ url_for('my_appointments') }}"><i class="fas fa-calendar-check"></i> Appointments</a>
+                    <a href="{{ url_for('check_status') }}"><i class="fas fa-search"></i> Check Status</a>
+                    <a href="{{ url_for('contact') }}"><i class="fas fa-envelope"></i> Contact</a>
+                    
+                    <!-- User/Admin Dropdown -->
+                    {% if current_user.is_admin %}
+                        <!-- Admin Dropdown -->
+                        <div class="dropdown" id="adminDropdown">
+                            <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">
+                                <i class="fas fa-user"></i> {{ current_user.username }}
+                                <span class="admin-badge">ADMIN</span>
+                                <i class="fas fa-chevron-down" style="font-size: 0.8rem;"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="{{ url_for('admin_dashboard') }}">
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                                </a>
+                                <a href="{{ url_for('admin_appointments') }}">
+                                    <i class="fas fa-calendar-check"></i> Appointments
+                                </a>
+                                <a href="{{ url_for('admin_messages') }}">
+                                    <i class="fas fa-envelope-open-text"></i> Messages
+                                </a>
+                                <a href="{{ url_for('admin_portfolio') }}">
+                                    <i class="fas fa-images"></i> Portfolio
+                                </a>
+                                <a href="{{ url_for('logout') }}" style="border-top: 1px solid #eee; margin-top: 5px; padding-top: 12px;">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <!-- Regular User -->
+                        <span class="nav-user"><i class="fas fa-user"></i> {{ current_user.username }}</span>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ url_for('about') }}"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="{{ url_for('portfolio') }}"><i class="fas fa-images"></i> Portfolio</a>
+                    <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message alert-{{ category }}">
+                        {% if category == 'success' %}
+                            <i class="fas fa-check-circle"></i>
+                        {% elif category == 'error' or category == 'danger' %}
+                            <i class="fas fa-exclamation-circle"></i>
+                        {% elif category == 'warning' %}
+                            <i class="fas fa-exclamation-triangle"></i>
+                        {% elif category == 'info' %}
+                            <i class="fas fa-info-circle"></i>
+                        {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-crown"></i> Vally's Divine Hair</h3>
+                    <p>Premium braiding and lash services. Because you deserve to be pretty every day plus we also do house calls ✨</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-link"></i> Quick Links</h3>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('services') }}">Services & Prices</a></li>
+                        <li><a href="{{ url_for('portfolio') }}">Our Portfolio</a></li>
+                        {% if current_user.is_authenticated %}
+                            <li><a href="{{ url_for('book') }}">Book Appointment</a></li>
+                            <li><a href="{{ url_for('my_appointments') }}">My Appointments</a></li>
+                            {% if current_user.is_admin %}
+                                <li><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+                            {% endif %}
+                        {% else %}
+                            <li><a href="{{ url_for('about') }}">About Us</a></li>
+                            <li><a href="{{ url_for('login') }}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-phone"></i> Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> 066 403 6257</p>
+                    <p><i class="fas fa-envelope"></i> valenciaalice@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 9AM-7PM<br>Sat: 9AM-5PM</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nhlazatshe no2</p>
+                    <p><i class="fas fa-house-signal"></i> House Calls Available</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Vally's Divine Hair. All rights reserved. | Created with Flask & Love</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Flash messages auto-hide
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var messages = document.querySelectorAll('.flash-message');
+                messages.forEach(function(message) {
+                    message.style.opacity = '0';
+                    setTimeout(function() { message.style.display = 'none'; }, 300);
+                });
+            }, 5000);
+        });
+
+        // Dropdown toggle
+        function toggleDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const dropdown = document.getElementById('adminDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('adminDropdown');
+            if (dropdown && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation to elements with fade-in-up class
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>

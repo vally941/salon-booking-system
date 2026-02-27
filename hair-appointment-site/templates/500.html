@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error - Vally's Divine Hair{% endblock %}
+
+{% block content %}
+<div class="container" style="text-align: center; padding: 5rem 0;">
+    <h1 style="font-size: 5rem; color: var(--deep-pink); margin-bottom: 1rem;">500</h1>
+    <h2 style="color: var(--charcoal); margin-bottom: 1rem;">Server Error</h2>
+    <p style="color: var(--light-charcoal); margin-bottom: 2rem; font-size: 1.1rem;">
+        Something went wrong on our end. Please try again later.
+    </p>
+    <a href="{{ url_for('home') }}" class="btn btn-primary">
+        <i class="fas fa-home"></i> Back to Home
+    </a>
+</div>
+{% endblock %}

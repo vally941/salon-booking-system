@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Services & Prices - Vally's Divine Hair{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Fix the service card height and spacing issues from base.html */
+    .service-card {
+        height: auto !important;
+        min-height: auto !important;
+        margin-bottom: 3rem !important;
+        padding-top: 80px !important;
+    }
+    
+    .service-icon {
+        top: -60px !important;
+        position: absolute !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 10 !important;
+    }
+    
+    .service-content {
+        padding: 1rem 1.5rem 1.5rem !important;
+        box-sizing: border-box !important;
+    }
+    
+    .service-wrapper {
+        margin-bottom: 5rem !important;
+        margin-top: 4rem !important;
+        position: relative !important;
+    }
+    
+    /* Ensure proper spacing for all elements */
+    .price-list {
+        margin: 1.5rem 0 !important;
+    }
+    
+    .service-duration {
+        margin: 1.5rem auto !important;
+        width: fit-content !important;
+    }
+    
+    .service-card .btn-primary {
+        margin-top: 1rem !important;
+        width: 100% !important;
+        padding: 10px 20px !important;
+        font-size: 0.95rem !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .service-card .btn-primary i {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Fix container spacing */
+    .container {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    /* Add extra space for the first service card */
+    .service-wrapper:first-of-type {
+        margin-top: 6rem !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section-title">
+        <h2>Our Services & Prices</h2>
+      
+    </div>
+    
+    {% for service in services %}
+    <div class="service-wrapper">
+        <div class="service-card">
+            <div class="service-icon">{{ service.icon|safe }}</div>
+            <div class="service-content">
+                <h3>{{ service.name }}</h3>
+                <p class="service-description">{{ service.description }}</p>
+                
+                <div class="price-list">
+                    {% if service.prices[0].size %}
+                        {% for price in service.prices %}
+                        <div class="price-item">
+                            <span class="price-label">{{ price.size }}</span>
+                            <span class="price-value">{{ price.price }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for price in service.prices %}
+                        <div class="price-item">
+                            <span class="price-label">{{ price.option }}</span>
+                            <span class="price-value">{{ price.price }}</span>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                
+                <div class="service-duration">
+                    <i class="fas fa-clock"></i> {{ service.duration }}
+                </div>
+                
+                <a href="{{ url_for('book') }}" class="btn btn-primary">
+                    <i class="fas fa-calendar-alt"></i> Book This Service
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <div style="text-align: center; margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, #FFF0F5, #ffffff); border-radius: 15px; box-shadow: 0 5px 15px rgba(255, 105, 180, 0.1);">
+        <h3 style="color: var(--charcoal); margin-bottom: 1rem;">Need Help Choosing?</h3>
+        <p style="color: var(--light-charcoal); margin-bottom: 2rem;">
+            Contact us for a free consultation to find the perfect style for you
+        </p>
+        <a href="{{ url_for('contact') }}" class="btn btn-primary">
+            <i class="fas fa-comments"></i> Get Free Consultation
+        </a>
+    </div>
+</div>
+{% endblock %}

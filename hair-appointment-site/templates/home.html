@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Vally's Divine Hair - Premium Braiding & Lashes{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <h1 class="fade-in-up">VALLY'S DIVINE HAIR</h1>
+
+        <!-- 🔥 UPDATED TAGLINE WITH HOUSE CALLS -->
+        <p class="tagline fade-in-up">
+            Because you deserve to be pretty every day plus we also do house calls ✨<br>
+        </p>
+        
+        <div class="cta-buttons fade-in-up">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('book') }}" class="btn btn-primary">
+                    <i class="fas fa-calendar-alt"></i> Book Appointment
+                </a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary">
+                    <i class="fas fa-calendar-alt"></i> Login to Book
+                </a>
+            {% endif %}
+            <a href="{{ url_for('services') }}" class="btn btn-secondary">
+                <i class="fas fa-spa"></i> View Services
+            </a>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Featured Services -->
+<section class="container">
+    <div class="section-title">
+        <h2>Our Signature Services</h2>
+        <p class="section-subtitle">Premium braiding and lash services at competitive prices</p>
+    </div>
+    
+    <div class="services-grid" style="margin-top: 4rem; padding-top: 60px;">
+        <!-- Service 1: Long Knotless Braids -->
+        <div class="service-wrapper fade-in-up">
+            <div class="service-card">
+                <div class="service-icon">💇‍♀️</div>
+                <div class="service-content">
+                    <h3>Long Knotless Braids</h3>
+                    <p class="service-description">Elegant and comfortable long knotless braids that last for weeks.</p>
+                    <div class="price-list">
+                        <div class="price-item">
+                            <span class="price-label">Large Boxes</span>
+                            <span class="price-value">R180</span>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Medium Boxes</span>
+                            <span class="price-value">R200</span>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Small Boxes</span>
+                            <span class="price-value">R250</span>
+                        </div>
+                    </div>
+                    <div class="service-duration">
+                        <i class="fas fa-clock"></i> 4-5 hours
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Service 2: Short Knotless Braids -->
+        <div class="service-wrapper fade-in-up">
+            <div class="service-card">
+                <div class="service-icon">💇‍♀️</div>
+                <div class="service-content">
+                    <h3>Short Knotless Braids</h3>
+                    <p class="service-description">Stylish and practical short braids perfect for everyday wear.</p>
+                    <div class="price-list">
+                        <div class="price-item">
+                            <span class="price-label">Large Boxes</span>
+                            <span class="price-value">R150</span>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Medium Boxes</span>
+                            <span class="price-value">R180</span>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Small Boxes</span>
+                            <span class="price-value">R200</span>
+                        </div>
+                    </div>
+                    <div class="service-duration">
+                        <i class="fas fa-clock"></i> 2-4 hours
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Service 3: Cluster Lashes -->
+        <div class="service-wrapper fade-in-up">
+            <div class="service-card">
+                <div class="service-icon">👁️</div>
+                <div class="service-content">
+                    <h3>Cluster Lashes</h3>
+                    <p class="service-description">Enhance your natural beauty with our premium cluster lashes.</p>
+                    <div class="price-list">
+                        <div class="price-item">
+                            <span class="price-label">Lashes Only</span>
+                            <span class="price-value">R70</span>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">With Braids</span>
+                            <span class="price-value">R50</span>
+                        </div>
+                    </div>
+                    <div class="service-duration">
+                        <i class="fas fa-clock"></i> 15-30 mins
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section style="background: var(--light-purple); padding: 5rem 0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Why Choose Vally's Divine Hair?</h2>
+            <p class="section-subtitle">Experience the difference with our premium services</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <div class="fade-in-up" style="text-align: center; padding: 2rem;">
+                <div style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 1rem;">👑</div>
+                <h3 style="color: var(--charcoal); margin-bottom: 1rem;">Premium Quality</h3>
+                <p style="color: var(--light-charcoal);">Using only the highest quality braiding hair and lash products</p>
+            </div>
+            
+            <div class="fade-in-up" style="text-align: center; padding: 2rem;">
+                <div style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 1rem;">💆‍♀️</div>
+                <h3 style="color: var(--charcoal); margin-bottom: 1rem;">Comfort Focused</h3>
+                <p style="color: var(--light-charcoal);">Knotless techniques for maximum comfort and minimal tension</p>
+            </div>
+            
+            <div class="fade-in-up" style="text-align: center; padding: 2rem;">
+                <div style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 1rem;">⏰</div>
+                <h3 style="color: var(--charcoal); margin-bottom: 1rem;">Flexible Hours</h3>
+                <p style="color: var(--light-charcoal);">Open 6 days a week with convenient online booking</p>
+            </div>
+            
+            <div class="fade-in-up" style="text-align: center; padding: 2rem;">
+                <div style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 1rem;">📞</div>
+                <h3 style="color: var(--charcoal); margin-bottom: 1rem;">Direct Contact</h3>
+                <p style="color: var(--light-charcoal);">Always available for questions: 066 403 6257</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section style="padding: 5rem 0; text-align: center;">
+    <div class="container">
+        <h2 style="font-size: 2.5rem; color: var(--charcoal); margin-bottom: 1rem;">Ready to Transform Your Look?</h2>
+        <p style="font-size: 1.2rem; color: var(--light-charcoal); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Book your appointment today and experience divine hair transformation
+        </p>
+        <div class="cta-buttons">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('book') }}" class="btn btn-primary" style="padding: 15px 50px; font-size: 1.2rem;">
+                    <i class="fas fa-magic"></i> Book Your Transformation
+                </a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary" style="padding: 15px 50px; font-size: 1.2rem;">
+                    <i class="fas fa-magic"></i> Login to Book
+                </a>
+            {% endif %}
+           
+        </div>
+        <p style="margin-top: 2rem; color: var(--light-charcoal);">
+            <i class="fas fa-phone"></i> Call us: <strong>066 403 6257</strong>
+        </p>
+    </div>
+</section>
+
+
+    </div>
+</section>
+
+{% endblock %}

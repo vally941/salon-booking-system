@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Check Appointment Status{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 500px; margin: 4rem auto;">
+    {% if not current_user.is_authenticated %}
+    <div style="text-align: center; padding: 3rem;">
+        <div style="font-size: 4rem; color: #ccc; margin-bottom: 1rem;">
+            <i class="fas fa-lock"></i>
+        </div>
+        <h3>Login Required</h3>
+        <p>You need to be logged in to check appointment status.</p>
+        <div style="margin-top: 2rem;">
+            <a href="{{ url_for('login') }}" class="btn btn-primary" style="margin-right: 10px;">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="{{ url_for('register') }}" class="btn btn-secondary">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <h2 style="text-align:center;">Check Appointment Status</h2>
+    <p style="text-align:center; color: #666;">
+        Enter the phone number you used when booking
+    </p>
+    <form method="POST">
+        <input 
+            type="text" 
+            name="phone" 
+            class="form-control"
+            placeholder="e.g. 0664036257"
+            required
+        >
+        <button class="btn btn-primary" style="width:100%; margin-top:1rem;">
+            Check Status
+        </button>
+    </form>
+    {% if appointment %}
+    <div style="margin-top:2rem; padding:1.5rem; background:#f8f9fa; border-radius:10px;">
+        <p><strong>Name:</strong> {{ appointment.customer_name }}</p>
+        <p><strong>Service:</strong> {{ appointment.service_type }}</p>
+        <p><strong>Date:</strong> {{ appointment.appointment_date }}</p>
+        <p><strong>Time:</strong> {{ appointment.appointment_time }}</p>
+        <p>
+            <strong>Status:</strong>
+            {% if appointment.status == 'confirmed' %}
+                <span style="font-weight:bold; color:green;">
+            {% elif appointment.status == 'pending' %}
+                <span style="font-weight:bold; color:orange;">
+            {% elif appointment.status == 'cancelled' %}
+                <span style="font-weight:bold; color:red;">
+            {% else %}
+                <span style="font-weight:bold; color:gray;">
+            {% endif %}
+                {{ appointment.status | capitalize }}
+            </span>
+        </p>
+    </div>
+    {% elif request.method == 'POST' %}
+        <p style="color:red; margin-top:1rem;">
+            No appointment found with this phone number.
+        </p>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
