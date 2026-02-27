@@ -199,4 +199,4 @@ This project demonstrates practical experience in:
 ## 👩🏽‍💻 Author
 
 Alice Valencia Maseko  
-IT Graduate | Software & Systems
+IT Graduate 
