@@ -2,7 +2,7 @@
 
 A full-stack salon booking web application built with Flask, SQLAlchemy, and MySQL.
 
-The system allows customers to book appointments online while administrators manage services, bookings, messages, and portfolio items through a secure dashboard.
+The system allows customers to book appointments online while administrators manage bookings, customers, messages, and portfolio items through a secure dashboard.
 
 ---
 
@@ -10,13 +10,13 @@ The system allows customers to book appointments online while administrators man
 
 This application demonstrates:
 
-- Full-stack web development with Flask
-- Database modeling using SQLAlchemy ORM
-- MySQL integration using PyMySQL
+- Full-stack web development using Flask
+- Relational database integration with MySQL
+- Backend logic implementation with SQLAlchemy ORM
 - User authentication and session management
 - Role-based admin access control
 - Secure password hashing
-- Environment-based configuration
+- CRUD operations across multiple models
 
 ---
 
@@ -39,42 +39,46 @@ This application demonstrates:
 
 ## 🗄️ Database Configuration
 
-The system connects to a MySQL database:
+The system connects to a MySQL database using:
 
 mysql+pymysql://root:@localhost/hair_salon_db
 
 The application uses:
 
 - SQLAlchemy ORM
-- Relational database design
 - Foreign key relationships
-- Structured tables for:
-  - Users
-  - Appointments
-  - Contact Messages
-  - Completed Jobs (Portfolio)
+- Structured relational tables
+
+### Database Tables
+
+- Users
+- Appointments
+- Contact Messages
+- Completed Jobs (Portfolio)
 
 ---
 
 ## 👤 Database Models
 
 ### User
-- Authentication system
+- Secure authentication system
 - Password hashing using Werkzeug
-- Role-based access (`is_admin` column)
+- Role-based access control (`is_admin` column)
+- Admin badge logic
 
 ### Appointment
 - Linked to users via foreign key
-- Stores booking details and status tracking
+- Stores booking details and appointment status
 
 ### ContactMessage
 - Stores customer inquiries
 - Admin can mark messages as read
 
 ### CompletedJob
-- Portfolio management
+- Portfolio management system
 - Featured items support
 - Image storage via URL
+- Automatic timestamp updates
 
 ---
 
@@ -88,12 +92,12 @@ The application uses:
 - Contact form submission
 
 ### Admin Features
-- Admin dashboard
-- Service & booking management
+- Secure admin dashboard
+- Appointment management
 - Customer management
-- Appointment status tracking
-- Portfolio management
 - Message monitoring
+- Portfolio management
+- Role-based route protection
 
 ---
 
@@ -101,9 +105,9 @@ The application uses:
 
 - Password hashing (Werkzeug)
 - Flask-Login session management
-- Role-based admin protection
+- Role-based admin route protection
+- Secure database relationships
 - Environment variable support via python-dotenv
-- Secure database structure with foreign keys
 
 ---
 
@@ -128,24 +132,55 @@ hair_salon_db
 
 python app.py  
 
-6️⃣ Open in your browser:
+---
 
-http://127.0.0.1:5000  
+## 🌐 Running the Application
+
+After starting the Flask development server:
+
+python app.py
+
+You should see output similar to:
+
+Running on http://127.0.0.1:5000
+
+Open your browser and navigate to:
+
+http://127.0.0.1:5000
+
+Note:
+This is a local development server. The URL will only work after running the application on your own machine.
+
+---
+
+## 📄 Available Routes (After Running the App)
+
+Public Pages:
+- Home → /
+- Services → /services
+- Portfolio → /portfolio
+- About → /about
+
+Protected Pages (Login Required):
+- Book Appointment → /book
+- Dashboard → /dashboard
 
 ---
 
 ## 🔄 Database Reset Script
 
-This project includes a database reset script that:
+The project includes a database reset script that:
 
 - Drops all existing tables
-- Recreates tables with the `is_admin` column
+- Recreates all tables with the `is_admin` column
 - Creates one default admin account
 
-Default Admin Login:
+### Default Admin Login
 
 Email: admin@vallys.com  
 Password: Admin123  
+
+(New registrations are not admins.)
 
 ---
 
@@ -153,15 +188,15 @@ Password: Admin123
 
 This project demonstrates practical experience in:
 
-- Building a database-driven web application
 - Designing relational database models
 - Implementing authentication systems
 - Creating secure admin role logic
-- Managing full CRUD operations
+- Managing CRUD operations
+- Building a complete database-driven web application
 
 ---
 
 ## 👩🏽‍💻 Author
 
 Alice Valencia Maseko  
-IT Graduate 
+IT Graduate | Software & Systems
